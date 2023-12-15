@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "npx nullstack start",
-    "start": "node ./production/server.js",
+    "start": "node ./.production/server.js",
     "serve": "yarn build && yarn start",
     "build": "npx nullstack build"
   }
