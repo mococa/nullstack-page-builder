@@ -9,6 +9,12 @@ html,
 body {
   min-height: 100vh;
   height: 0;
+  color: rgb(204, 204, 204);
+  background-color: rgba(37, 37, 37, 0.95);
+}
+
+#application {
+  height: 100%;
 }
 
 body,
@@ -38,7 +44,6 @@ ul {
 
 a {
   text-decoration: none;
-  color: theme_color(verdigris, 600);
   font-size: 0.875rem;
 }
 
