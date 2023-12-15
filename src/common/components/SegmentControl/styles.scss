@@ -1,0 +1,60 @@
+.segment-control {
+  display: grid;
+  grid-template-columns: repeat(var(--amount-of-options), 1fr);
+
+  position: relative;
+
+  background-color: rgb(43, 43, 43);
+
+  border-radius: 8px;
+
+  padding: 2px;
+
+  .indicator {
+    display: flex;
+    place-self: center;
+
+    position: absolute;
+
+    transition: 250ms ease;
+
+    height: calc(100% - 4px);
+    width: calc((100% / var(--amount-of-options)) - 4px);
+
+    z-index: 0;
+
+    background: rgb(85, 85, 85);
+
+    border-radius: 6px;
+  }
+
+  button {
+    padding: 6px 16px;
+
+    color: #999999;
+    font-size: 0.75rem;
+
+    background-color: transparent;
+
+    border: none;
+
+    z-index: 1;
+
+    svg {
+      height: 14px;
+      width: 14px;
+
+      path {
+        fill: currentColor;
+        &[stroke-width] {
+          stroke: currentColor;
+        }
+      }
+    }
+
+    &[data-selected='true'] {
+      font-weight: 500;
+      color: white;
+    }
+  }
+}
