@@ -2,7 +2,11 @@ import { Assets } from '_assets';
 
 import './styles.scss';
 
-export const Navbar = () => (
+interface Props {
+  openElements: () => void;
+}
+
+export const Navbar = ({ openElements }: Props) => (
   <header class="page-builder-navbar">
     <section>
       <span>
@@ -11,7 +15,7 @@ export const Navbar = () => (
         <Assets.Chevron.down />
       </span>
 
-      <button>
+      <button onclick={openElements}>
         <Assets.Icons.plus />
 
         <span>Insert</span>
