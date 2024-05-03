@@ -29,7 +29,5 @@
     "serve": "yarn build && yarn start",
     "build": "npx nullstack build"
   },
-  "dependencies": {
-    "require-dir": "^1.2.0"
-  }
+  "dependencies": {}
 }
