@@ -28,5 +28,8 @@
     "start": "node ./.production/server.js",
     "serve": "yarn build && yarn start",
     "build": "npx nullstack build"
+  },
+  "dependencies": {
+    "require-dir": "^1.2.0"
   }
 }

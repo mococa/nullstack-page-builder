@@ -1,0 +1,16 @@
+.elements-modal[open] {
+  display: flex;
+  flex-flow: column;
+
+  margin: auto;
+  padding: 16px;
+
+  border-radius: 8px;
+  border: none;
+
+  min-width: 480px;
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
