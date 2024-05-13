@@ -3,8 +3,12 @@
   flex-flow: column;
   gap: 12px;
 
-  background-color: #171717;
+  background-color: #131313;
 
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+
+  margin: 12px;
   padding: 12px;
 
   & > section {

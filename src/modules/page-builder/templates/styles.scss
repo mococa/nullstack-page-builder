@@ -4,7 +4,8 @@
     'nav nav nav'
     'sidebar-left main sidebar-right';
   grid-template-rows: auto 1fr;
-  grid-template-columns: 260px 1fr 300px;
+  grid-template-columns: 350px 1fr 350px;
+  grid-row-gap: 24px;
 
   height: 100%;
 
@@ -21,9 +22,13 @@
   display: flex;
   flex-flow: column;
 
-  padding: 12px;
+  background-color: #131313;
 
-  background-color: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+
+  margin: 0 12px 24px;
+  padding: 12px;
 
   &:nth-of-type(1) {
     grid-area: sidebar-left;
