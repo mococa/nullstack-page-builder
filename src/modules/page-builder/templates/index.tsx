@@ -69,7 +69,12 @@ export class PageBuilderTemplate extends Nullstack {
               values: c.defaultValues,
               modal: null,
             });
+
             this.elements_modal.close();
+            
+            setTimeout(() => {
+              this.components.at(-1).modal.showModal();
+            }, 50);
           }}
         />
       </main>
