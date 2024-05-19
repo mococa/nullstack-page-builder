@@ -2,7 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "_*": ["./src/*"]
+      "@cms/*": ["src/apps/cms/*"],
+      "@custom/*": ["src/apps/custom/*"],
+      "@common/*": ["src/common/*"],
+      "@types": ["src/apps/@types/index.d.ts"]
     },
     "strict": false,
     "noImplicitAny": false,
