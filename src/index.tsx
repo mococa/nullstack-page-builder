@@ -8,12 +8,6 @@ import { ElementsInstances } from '@common/instances/PageBuilder/elements';
 import '@common/styles/global.scss';
 
 export class Application extends Nullstack {
-  hydrate(context: NullstackClientContext) {
-    if (!context.instances.pagebuilder) return;
-
-    context.instances.pagebuilder.elements = new ElementsInstances(context);
-  }
-
   render() {
     return (
       <html>
