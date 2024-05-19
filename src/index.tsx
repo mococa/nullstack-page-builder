@@ -1,10 +1,19 @@
-import Nullstack from 'nullstack';
+import Nullstack, { NullstackClientContext } from 'nullstack';
 
-import { PageBuilderTemplate } from '_modules/page-builder/templates';
+import { PageBuilderTemplate } from '@cms/modules/page-builder/templates';
 
-import '_styles/global.scss';
+import { Instances } from '@common/instances';
+import { ElementsInstances } from '@common/instances/PageBuilder/elements';
+
+import '@common/styles/global.scss';
 
 export class Application extends Nullstack {
+  hydrate(context: NullstackClientContext) {
+    if (!context.instances.pagebuilder) return;
+
+    context.instances.pagebuilder.elements = new ElementsInstances(context);
+  }
+
   render() {
     return (
       <html>
@@ -18,6 +27,8 @@ export class Application extends Nullstack {
         </head>
 
         <body>
+          <Instances />
+
           <PageBuilderTemplate />
         </body>
       </html>

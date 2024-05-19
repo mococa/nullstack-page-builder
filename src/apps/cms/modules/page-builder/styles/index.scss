@@ -1,0 +1,51 @@
+.page-builder-sidebar {
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+
+  background-color: #131313;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+
+  margin: 12px;
+  padding: 12px;
+
+  & > section {
+    display: flex;
+    flex-flow: column;
+
+    padding-block: 16px;
+
+    &:not(:first-of-type) {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    & > b {
+      color: white;
+      font-size: 0.75rem;
+    }
+
+    & > ul {
+      display: flex;
+      flex-flow: column;
+      gap: 8px;
+
+      padding: 8px 12px;
+      padding-right: 0;
+
+      li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: 0.75rem;
+
+        span {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
