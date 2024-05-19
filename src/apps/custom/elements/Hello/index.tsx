@@ -2,9 +2,9 @@ import { Hello as Component } from './Hello';
 import { Form } from './Form';
 import { Mococa } from '@types';
 
-export const Hello: Mococa.Component = {
+export const Hello = {
   name: 'Hello text',
   component: Component as unknown as ({}) => JSX.Element,
-  form: Form as unknown as ({}) => JSX.Element,
+  form: props => <Form {...props} />,
   defaultValues: { name: 'Amazing!' },
-};
+} as unknown as Mococa.Component;

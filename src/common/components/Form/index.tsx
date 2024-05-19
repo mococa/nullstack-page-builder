@@ -1,4 +1,8 @@
 import { HTMLAttributes } from 'nullstack';
+import {
+  SegmentControl as SegControl,
+  SegmentControlProps,
+} from '../SegmentControl';
 import './styles.scss';
 
 export namespace FormProps {
@@ -6,6 +10,10 @@ export namespace FormProps {
     label: string;
   }
   export interface Button extends HTMLAttributes<HTMLButtonElement> {}
+
+  export interface SegmentControl extends SegmentControlProps {
+    label: string;
+  }
 }
 
 export const MococaForm = {
@@ -20,5 +28,12 @@ export const MococaForm = {
     <button class="mococa-button" {...props}>
       {props.children}
     </button>
+  ),
+  SegmentControl: ({ label, ...props }: FormProps.SegmentControl) => (
+    <div class="mococa-segment-control">
+      <span>{label}</span>
+
+      <SegControl {...props} />
+    </div>
   ),
 };

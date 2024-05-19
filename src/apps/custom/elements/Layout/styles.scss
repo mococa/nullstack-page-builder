@@ -1,0 +1,39 @@
+.element-layout {
+  display: flex;
+
+  &[data-direction='horizontal'] {
+    flex-direction: row;
+
+    &[data-align='left'] {
+      justify-content: flex-start;
+    }
+
+    &[data-align='center'] {
+      justify-content: center;
+    }
+
+    &[data-align='right'] {
+      justify-content: flex-end;
+    }
+  }
+
+  &[data-direction='vertical'] {
+    flex-direction: column;
+
+    &[data-align='left'] {
+      align-items: flex-start;
+    }
+
+    &[data-align='center'] {
+      align-items: center;
+    }
+
+    &[data-align='right'] {
+      align-items: flex-end;
+    }
+  }
+
+  &[data-wrap='wrap'] {
+    flex-wrap: wrap;
+  }
+}

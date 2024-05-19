@@ -9,6 +9,10 @@ interface Props extends Mococa.FormProps {
 export class Form extends Nullstack<Props> {
   values: { name: string };
 
+  update({ onsubmit }: NullstackClientContext<Props>) {
+    onsubmit({ values: this.values });
+  }
+
   prepare({ defaultValues }: NullstackClientContext<Props>) {
     Object.keys(defaultValues).forEach(key => {
       if (this.values) return;
@@ -18,18 +22,9 @@ export class Form extends Nullstack<Props> {
     });
   }
 
-  render({ onsubmit }: NullstackClientContext<Props>) {
+  render() {
     return (
-      <form
-        class="mococa-form"
-        onsubmit={() => {
-          onsubmit({ values: { name: this.values.name } });
-        }}
-      >
-        <MococaForm.Input label="Name" bind={this.values.name} />
-
-        <MococaForm.Button type="submit">Update</MococaForm.Button>
-      </form>
+      <MococaForm.Input label="Name" bind={this.values.name} debounce={300} />
     );
   }
 }
