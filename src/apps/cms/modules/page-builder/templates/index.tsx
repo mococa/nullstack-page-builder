@@ -20,8 +20,6 @@ export class PageBuilderTemplate extends Nullstack {
   selected_component: string;
 
   renderElementSection({ instances }: Partial<NullstackClientContext>) {
-    if (!this.hydrated) return null;
-
     const { elements } = instances.pagebuilder;
     const { elements: elements_list } = elements;
 
@@ -32,20 +30,17 @@ export class PageBuilderTemplate extends Nullstack {
     return (
       <section onclick={() => (elements.selected_element = '')}>
         {elements_list.map(component => {
-          return <MainSectionComponents key={key} component={component} />;
+          return <MainSectionComponents component={component} />;
         })}
       </section>
     );
   }
 
   renderElementsModal({ instances }: Partial<NullstackClientContext>) {
-    if (!this.hydrated) return null;
-
     const { elements } = instances.pagebuilder;
     const { elements: elements_list, selected_element } = elements;
 
     const all_elements = flatten_elements(elements_list);
-    console.log(all_elements.length);
 
     return (
       <ElementsModal
@@ -86,7 +81,7 @@ export class PageBuilderTemplate extends Nullstack {
     );
   }
 
-  render({ instances }: NullstackClientContext) {
+  render() {
     return (
       <main class="page-builder-template">
         <Navbar

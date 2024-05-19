@@ -1,6 +1,8 @@
+import { Assets } from '@cms/assets';
 import { Mococa } from '@types';
 import Nullstack, { NullstackClientContext } from 'nullstack';
 import { delay } from '../../utils/delay';
+import { filter_out_element_by_id } from '../../utils/filter_out_element_by_id';
 import './styles.scss';
 
 interface RendererProps {
@@ -32,10 +34,30 @@ export class SidebarTree extends Nullstack<RendererProps> {
           elements.selected_element = id;
         }}
       >
-        <span>
-          {component.name}
-          {component.name === 'Layout' && ` - ${component.values['direction']}`}
-        </span>
+        <div>
+          <span>
+            {component.name}
+            {component.name === 'Layout' &&
+              ` - ${component.values['direction']}`}
+          </span>
+
+          <button
+            onclick={async () => {
+              if (confirm('Are you sure you want to delete this element?')) {
+                elements.selected_element = null;
+
+                const filtered = filter_out_element_by_id(
+                  elements.elements || [],
+                  id,
+                );
+
+                elements.elements = filtered;
+              }
+            }}
+          >
+            <Assets.Icons.trash />
+          </button>
+        </div>
 
         {!!children && (
           <ul>

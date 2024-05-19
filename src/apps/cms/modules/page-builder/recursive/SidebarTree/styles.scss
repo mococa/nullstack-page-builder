@@ -4,7 +4,11 @@ li.sidebartree-item {
 
   font-size: 0.75rem;
 
-  span {
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     width: 100%;
 
     padding: 6px;
@@ -14,15 +18,32 @@ li.sidebartree-item {
     cursor: pointer;
 
     transition: 100ms ease;
+
+    button {
+      opacity: 0;
+
+      border: none;
+
+      background-color: transparent;
+
+      svg {
+        color: #b24242;
+      }
+    }
+
+    &:hover {
+      & > button {
+        opacity: 1;
+      }
+    }
   }
 
-  &[data-selected='false'] > span:hover {
+  &[data-selected='false'] > div:hover {
     background-color: rgba(85, 85, 85, 0.25);
   }
 
-  &[data-selected='true'] > span {
-    background-color: rgb(85, 85, 85);
-    color: white;
+  &[data-selected='true'] > div {
+    background-color: rgb(43, 43, 43);
   }
 
   & > ul {

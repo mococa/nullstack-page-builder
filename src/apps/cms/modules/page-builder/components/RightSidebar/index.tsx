@@ -5,8 +5,6 @@ import { flatten_elements } from '@cms/modules/page-builder/utils/flatten_elemen
 
 export class RightSidebar extends Nullstack {
   renderElementForm({ instances }: Partial<NullstackClientContext>) {
-    if (!this.hydrated) return null;
-
     const { elements, selected_element } = instances.pagebuilder.elements;
     if (!selected_element) return null;
 
