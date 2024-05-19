@@ -14,5 +14,12 @@ export namespace Mococa {
     component: (props: ComponentProps) => JSX.Element;
     form: (props: FormProps) => NullstackNode;
     defaultValues: ComponentProps['values'];
+    children?: Component[];
+  }
+
+  export interface BuildComponent extends Component {
+    id: string;
+    values: Component['defaultValues'];
+    children: BuildComponent[];
   }
 }

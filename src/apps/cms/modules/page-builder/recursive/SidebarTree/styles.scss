@@ -1,0 +1,31 @@
+li.sidebartree-item {
+  display: flex;
+  flex-flow: column;
+
+  font-size: 0.75rem;
+
+  span {
+    width: 100%;
+
+    padding: 6px;
+
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    transition: 100ms ease;
+  }
+
+  &[data-selected='false'] > span:hover {
+    background-color: rgba(85, 85, 85, 0.25);
+  }
+
+  &[data-selected='true'] > span {
+    background-color: rgb(85, 85, 85);
+    color: white;
+  }
+
+  & > ul {
+    padding-left: 8px;
+  }
+}

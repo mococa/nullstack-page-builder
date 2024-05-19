@@ -6,7 +6,7 @@ import {
 
 import './styles.scss';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface SegmentControlProps extends HTMLAttributes<HTMLDivElement> {
   options: { id: string; label: NullstackNode }[];
   bind: NullstackClientContext['bind'];
 }
@@ -18,7 +18,7 @@ export const SegmentControl = ({
   options,
   bind: { object: property, property: name },
   ...props
-}: Props) => (
+}: SegmentControlProps) => (
   <div
     {...props}
     class="segment-control"

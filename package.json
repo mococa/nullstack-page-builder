@@ -5,6 +5,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.17.4",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
@@ -32,6 +33,7 @@
     "build": "npx nullstack build"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "uuid": "^9.0.1"
   }
 }
