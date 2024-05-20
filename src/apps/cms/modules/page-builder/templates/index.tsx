@@ -22,23 +22,17 @@ export class PageBuilderTemplate extends Nullstack {
 
   renderElementSection({ instances }: Partial<NullstackClientContext>) {
     const { elements } = instances.pagebuilder;
-    const { elements: elements_list } = elements;
-
-    const all_elements = flatten_elements(elements_list);
 
     return (
       <section onclick={() => (elements.selected_element = '')}>
-        {/* {elements_list.map(component => {
-          return <MainSectionComponents component={component} />;
-        })} */}
-
-        <Canvas key="canvas" />
+        {this.hydrated && <Canvas key="canvas" />}
       </section>
     );
   }
 
   renderElementsModal({ instances }: Partial<NullstackClientContext>) {
     const { elements } = instances.pagebuilder;
+
     const { elements: elements_list, selected_element } = elements;
 
     const all_elements = flatten_elements(elements_list);
@@ -72,19 +66,21 @@ export class PageBuilderTemplate extends Nullstack {
 
             elements.selected_element = component.id;
 
-            instances.canvas.draw();
+            instances.canvas.draw({});
             return;
           }
 
+          console.log(`pushing ${component.name} into root`);
+
           elements_list.push(component);
           this.elements_modal.close();
-          instances.canvas.draw();
+          instances.canvas.draw({});
         }}
       />
     );
   }
 
-  render() {
+  render({ instances }) {
     return (
       <main class="page-builder-template">
         <Navbar

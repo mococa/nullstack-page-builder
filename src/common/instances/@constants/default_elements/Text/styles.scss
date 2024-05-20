@@ -1,0 +1,33 @@
+.element-text {
+  color: black;
+
+  white-space: break-spaces;
+
+  &[data-align='left'] {
+    text-align: left;
+  }
+
+  &[data-align='center'] {
+    text-align: center;
+  }
+
+  &[data-align='right'] {
+    text-align: right;
+  }
+
+  &[data-weight='thin'] {
+    font-weight: lighter;
+  }
+
+  &[data-weight='normal'] {
+    font-weight: normal;
+  }
+
+  &[data-weight='medium'] {
+    font-weight: 500;
+  }
+
+  &[data-weight='bold'] {
+    font-weight: bold;
+  }
+}

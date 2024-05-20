@@ -4,7 +4,7 @@ import { PageBuilderInstance } from './PageBuilder';
 export class Instances extends Nullstack {
   render() {
     return (
-      <ns-instances persistent>
+      <ns-instances>
         <PageBuilderInstance persistent key="pagebuilder" />
       </ns-instances>
     );

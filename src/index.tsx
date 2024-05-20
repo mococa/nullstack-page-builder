@@ -1,11 +1,11 @@
-import Nullstack, { NullstackClientContext } from 'nullstack';
+import Nullstack from 'nullstack';
+
+import { Instances } from '@common/instances';
 
 import { PageBuilderTemplate } from '@cms/modules/page-builder/templates';
 
-import { Instances } from '@common/instances';
-import { ElementsInstances } from '@common/instances/PageBuilder/elements';
-
 import '@common/styles/global.scss';
+import { PageBuilderInstance } from '@common/instances/PageBuilder';
 
 export class Application extends Nullstack {
   render() {
@@ -21,7 +21,10 @@ export class Application extends Nullstack {
         </head>
 
         <body>
+          {/* <PageBuilderInstance persistent key="pagebuilder" /> */}
+
           <Instances />
+          {/* <PageBuilderInstance persistent key="pagebuilder" /> */}
 
           <PageBuilderTemplate />
         </body>

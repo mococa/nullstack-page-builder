@@ -28,6 +28,31 @@
   }
 }
 
+.mococa-textarea {
+  display: flex;
+  flex-flow: column;
+  gap: 6px;
+
+  font-size: 0.75rem;
+
+  span {
+    font-weight: 500;
+  }
+
+  textarea {
+    border: 1px solid rgba(54, 54, 54, 0.95);
+    border-radius: 4px;
+
+    background-color: rgba(37, 37, 37, 0.95);
+
+    resize: vertical;
+
+    color: white;
+
+    padding: 4px;
+  }
+}
+
 .mococa-button {
   display: grid;
   place-items: center;
