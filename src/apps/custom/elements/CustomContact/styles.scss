@@ -1,0 +1,104 @@
+section#custom-contact {
+  max-width: 1440px;
+  flex-flow: column;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+  margin: 0 auto;
+  padding-block: 72px;
+  display: flex;
+
+  .heading {
+    flex-flow: column;
+    align-items: center;
+    gap: 16px;
+    display: flex;
+    max-width: 680px;
+
+    a {
+      color: #4a2dff;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    & > b {
+      color: #000;
+      font-family: Heebo;
+      font-size: 3.375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    span {
+      font-family: Inter, sans-serif;
+      font-size: 1.125rem;
+      text-align: center;
+      color: #5a5a5a;
+    }
+  }
+
+  form {
+    flex-flow: column;
+    gap: 36px;
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+
+    color: #5a5a5a;
+
+    .form-input {
+      display: block;
+      position: relative;
+
+      span {
+        cursor: text;
+        font-family: Space Grotesk, sans-serif;
+        font-size: 1.25rem;
+        transition: all 0.2s;
+        position: absolute;
+        top: 14px;
+        left: 14px;
+      }
+
+      input,
+      textarea {
+        border: 2px solid #edf1f9;
+        border-bottom: 5px solid #edf1f9;
+        resize: vertical;
+        background-color: #fff;
+        border-radius: 4px;
+        outline: 1px solid #0000;
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+      }
+    }
+
+    .form-input:focus-within span,
+    .form-input:has(input:not([data-value=''])) span,
+    .form-input:has(textarea:not([data-value=''])) span {
+      top: -24px;
+      left: 0;
+
+      cursor: default;
+
+      font-size: 1rem;
+
+      color: #4f545fe0;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      background: #141534;
+      color: #fff;
+      font-size: 1rem;
+      padding: 8px 18px;
+    }
+  }
+}

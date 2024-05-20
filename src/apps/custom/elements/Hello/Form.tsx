@@ -23,8 +23,6 @@ export class Form extends Nullstack<Props> {
   }
 
   render() {
-    return (
-      <MococaForm.Input label="Name" bind={this.values.name} debounce={300} />
-    );
+    return <MococaForm.Input label="Name" bind={this.values.name} />;
   }
 }

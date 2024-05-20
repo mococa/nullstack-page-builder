@@ -8,7 +8,7 @@ import './styles.scss';
 
 const wrapper_style = (visible: boolean) =>
   visible
-    ? 'left: 0;z-index: 2;position: absolute;top: 0;width: 100%;height: calc(100% - 48px);margin-top: 48px;background: white;'
+    ? 'left: 0;z-index: 2;position: absolute;top: 0;width: 100%;height: calc(100% - 48px);margin-top: 48px;background: white;overflow: auto;'
     : 'position:absolute; z-index:-1; aspect-ratio: 16/9; width: 1920px; left: -2690px;display:flex;';
 
 export class Canvas extends Nullstack {
@@ -92,11 +92,14 @@ export class Canvas extends Nullstack {
     if (!this.canvas) return;
     if (!this._html2canvas) return;
 
-    await delay(25);
+    await delay(100);
 
     const vpt = this.canvas.viewportTransform.slice();
 
-    const result = await this._html2canvas(this.svg_wrapper);
+    const result = await this._html2canvas(this.svg_wrapper, {
+      useCORS: true,
+      allowTaint: false,
+    });
 
     const page = instances.pagebuilder.elements.elements.find(
       ({ name }) => name === 'Page',
