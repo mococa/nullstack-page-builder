@@ -46,11 +46,21 @@ export class Navbar extends Nullstack<Props> {
 
           <button
             onclick={() => {
+              if (instances.pagebuilder.elements.selected_element) {
+                instances.pagebuilder.elements.last_selected_element =
+                  instances.pagebuilder.elements.selected_element;
+              }
+
               instances.pagebuilder.elements.selected_element = null;
 
               instances.pagebuilder.previewing = !Boolean(
                 instances.pagebuilder.previewing,
               );
+
+              if (!instances.pagebuilder.previewing) {
+                instances.pagebuilder.elements.selected_element =
+                  instances.pagebuilder.elements.last_selected_element;
+              }
             }}
           >
             <Assets.Icons.play />
@@ -61,16 +71,14 @@ export class Navbar extends Nullstack<Props> {
               const stringified_json = prompt('Stringified JSON');
               if (!stringified_json) return;
 
-              instances.pagebuilder.elements.load({ stringified_json });
-              instances.canvas.draw();
+              instances.pagebuilder.load({ stringified_json });
+              instances.canvas.draw({});
             }}
           >
             Invite
           </button>
 
-          <button onclick={() => instances.pagebuilder.elements.save()}>
-            Publish
-          </button>
+          <button onclick={() => instances.pagebuilder.save()}>Publish</button>
         </section>
       </header>
     );

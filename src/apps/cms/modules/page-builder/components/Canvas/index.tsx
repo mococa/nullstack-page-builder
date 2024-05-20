@@ -1,18 +1,20 @@
 import Nullstack, { NullstackClientContext } from 'nullstack';
 import { fabric } from 'fabric';
-import './styles.scss';
+
 import { MainSectionComponents } from '../../recursive/MainSectionComponents';
 import { delay } from '../../utils/delay';
+
+import './styles.scss';
 
 const wrapper_style = (visible: boolean) =>
   visible
     ? 'left: 0;z-index: 2;position: absolute;top: 0;width: 100%;height: calc(100% - 48px);margin-top: 48px;background: white;'
-    : 'position:absolute; z-index:-1; aspect-ratio: 16/9; width: 1920px; left: -2690px;';
+    : 'position:absolute; z-index:-1; aspect-ratio: 16/9; width: 1920px; left: -2690px;display:flex;';
 
 export class Canvas extends Nullstack {
   _html2canvas;
   canvas: fabric.Canvas;
-  zoom = 1;
+  zoom = 0.5;
   canvas_ref: HTMLCanvasElement;
   canvas_wrapper: HTMLDivElement;
   svg_wrapper: HTMLDivElement;
@@ -23,6 +25,8 @@ export class Canvas extends Nullstack {
 
   hydrate({ instances }: NullstackClientContext) {
     const html2canvas = require('html2canvas');
+
+    const { elements } = instances.pagebuilder;
 
     this.canvas = new fabric.Canvas(this.canvas_ref, {
       width: this.canvas_wrapper.clientWidth,
@@ -78,17 +82,13 @@ export class Canvas extends Nullstack {
 
     this._html2canvas = html2canvas;
 
-    document.addEventListener('keydown', event =>
-      this.onkeydown({ event, instances }),
-    );
-    document.addEventListener('keyup', event =>
-      this.onkeyup({ event, instances }),
-    );
+    document.addEventListener('keydown', event => this.onkeydown({ event }));
+    document.addEventListener('keyup', event => this.onkeyup({ event }));
 
-    this.draw();
+    this.draw({});
   }
 
-  async draw() {
+  async draw({ instances }: Partial<NullstackClientContext>) {
     if (!this.canvas) return;
     if (!this._html2canvas) return;
 
@@ -97,6 +97,10 @@ export class Canvas extends Nullstack {
     const vpt = this.canvas.viewportTransform.slice();
 
     const result = await this._html2canvas(this.svg_wrapper);
+
+    const page = instances.pagebuilder.elements.elements.find(
+      ({ name }) => name === 'Page',
+    );
 
     const img = this.canvas.getObjects()[0];
     const options: fabric.IImageOptions | null = !img
@@ -108,6 +112,7 @@ export class Canvas extends Nullstack {
           width: img.width,
           left: img.left,
           top: img.top,
+          backgroundColor: (page?.values?.background as string) || '#ffffff',
         };
 
     const imgInstance = new fabric.Image(result, options);
@@ -131,9 +136,7 @@ export class Canvas extends Nullstack {
     document.removeEventListener('keydown', event =>
       this.onkeydown({ event, instances }),
     );
-    document.removeEventListener('keyup', event =>
-      this.onkeyup({ event, instances }),
-    );
+    document.removeEventListener('keyup', event => this.onkeyup({ event }));
   }
 
   private _onresize() {
@@ -143,14 +146,13 @@ export class Canvas extends Nullstack {
 
   private onkeyup({
     event,
-    instances,
   }: Partial<NullstackClientContext<{ event: KeyboardEvent }>>) {
     if (event.key === ' ') {
       this.pressingSpace = false;
     }
   }
 
-  private onkeydown({
+  onkeydown({
     event,
     instances,
   }: Partial<NullstackClientContext<{ event: KeyboardEvent }>>) {
@@ -168,17 +170,17 @@ export class Canvas extends Nullstack {
       instances.pagebuilder.elements.elements = [];
       this.canvas.clear();
       this.canvas.renderAll();
-      this.draw();
+      this.draw({});
     }
 
     if (!event.ctrlKey) return;
 
-    if (event.key === 'c') return instances.pagebuilder.elements.copy();
+    if (event.key === 'c') return instances.pagebuilder.copy({});
 
     if (event.key === 'v') {
       navigator.clipboard.readText().then(stringified_json => {
-        instances.pagebuilder.elements.load({ stringified_json });
-        this.draw();
+        instances.pagebuilder.load({ stringified_json });
+        this.draw({});
       });
     }
   }

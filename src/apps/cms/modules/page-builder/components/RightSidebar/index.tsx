@@ -20,7 +20,7 @@ export class RightSidebar extends Nullstack {
       defaultValues: merge({}, defaultValues, values),
       onsubmit: async ({ values }) => {
         element.values = values;
-        instances.canvas.draw();
+        instances.canvas.draw({});
       },
     };
 
