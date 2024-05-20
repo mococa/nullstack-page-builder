@@ -14,6 +14,7 @@ import { ElementsModal } from '../components/ElementsModal';
 
 import './styles.scss';
 import { delay } from '../utils/delay';
+import { Canvas } from '../components/Canvas';
 
 export class PageBuilderTemplate extends Nullstack {
   elements_modal: HTMLDialogElement;
@@ -25,13 +26,13 @@ export class PageBuilderTemplate extends Nullstack {
 
     const all_elements = flatten_elements(elements_list);
 
-    const key = all_elements.map(({ id }) => id).join('.');
-
     return (
       <section onclick={() => (elements.selected_element = '')}>
-        {elements_list.map(component => {
+        {/* {elements_list.map(component => {
           return <MainSectionComponents component={component} />;
-        })}
+        })} */}
+
+        <Canvas key="canvas" />
       </section>
     );
   }
@@ -71,11 +72,13 @@ export class PageBuilderTemplate extends Nullstack {
 
             elements.selected_element = component.id;
 
+            instances.canvas.draw();
             return;
           }
 
           elements_list.push(component);
           this.elements_modal.close();
+          instances.canvas.draw();
         }}
       />
     );

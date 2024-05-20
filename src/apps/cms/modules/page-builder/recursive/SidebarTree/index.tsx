@@ -52,6 +52,8 @@ export class SidebarTree extends Nullstack<RendererProps> {
                 );
 
                 elements.elements = filtered;
+
+                instances.canvas.draw();
               }
             }}
           >

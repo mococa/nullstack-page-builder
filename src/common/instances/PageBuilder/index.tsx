@@ -4,6 +4,7 @@ import { ElementsInstances } from './elements';
 
 export class PageBuilderInstance extends Nullstack {
   elements: ElementsInstances;
+  previewing: boolean;
 
   initiate({ instances }: NullstackClientContext) {
     instances.pagebuilder.elements = this.elements;

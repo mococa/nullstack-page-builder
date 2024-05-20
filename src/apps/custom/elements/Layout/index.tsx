@@ -13,4 +13,5 @@ export const Layout = {
   form: props => <Form {...props} />,
   name: 'Layout',
   children: [],
+  allowChildren: true,
 } as unknown as Mococa.Component;

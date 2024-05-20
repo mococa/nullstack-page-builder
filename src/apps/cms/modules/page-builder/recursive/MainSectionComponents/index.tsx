@@ -20,12 +20,12 @@ export class MainSectionComponents extends Nullstack<RendererProps> {
       <div
         onclick={async ({ event }) => {
           event.stopPropagation();
-          elements.selected_element = null;
+          // elements.selected_element = null;
 
-          // Delay for re-render
-          await delay(25);
+          // // Delay for re-render
+          // await delay(25);
 
-          elements.selected_element = id;
+          // elements.selected_element = id;
         }}
         data-selected={String(elements.selected_element === id)}
       >

@@ -1,4 +1,5 @@
 import Nullstack, { NullstackClientContext } from 'nullstack';
+import './styles.scss';
 
 interface Props {
   values: { name: string };
