@@ -15,11 +15,13 @@ export namespace Mococa {
     form: (props: FormProps) => NullstackNode;
     defaultValues: ComponentProps['values'];
     children?: Component[];
+    allowChildren?: boolean;
   }
 
   export interface BuildComponent extends Component {
     id: string;
     values: Component['defaultValues'];
     children: BuildComponent[];
+    parentId?: string;
   }
 }

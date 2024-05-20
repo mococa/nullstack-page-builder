@@ -7,6 +7,7 @@ const plugins = [new TsconfigPathsPlugin({})];
 
 function custom_client(...args) {
   const config = client(...args);
+  config.externals.canvas = 'commonjs canvas';
 
   const { rules } = config.module;
 
@@ -33,6 +34,7 @@ function custom_client(...args) {
 
 function custom_server(...args) {
   const config = server(...args);
+  config.externals.canvas = 'commonjs canvas';
 
   const { rules } = config.module;
 

@@ -2,6 +2,7 @@ import Nullstack, { NullstackClientContext, NullstackNode } from 'nullstack';
 import { merge } from 'lodash';
 
 import { flatten_elements } from '@cms/modules/page-builder/utils/flatten_elements';
+import { delay } from '../../utils/delay';
 
 export class RightSidebar extends Nullstack {
   renderElementForm({ instances }: Partial<NullstackClientContext>) {
@@ -17,7 +18,10 @@ export class RightSidebar extends Nullstack {
 
     const form_props = {
       defaultValues: merge({}, defaultValues, values),
-      onsubmit: ({ values }) => (element.values = values),
+      onsubmit: async ({ values }) => {
+        element.values = values;
+        instances.canvas.draw();
+      },
     };
 
     return (
