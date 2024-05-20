@@ -1,7 +1,5 @@
 import Nullstack, { NullstackClientContext } from 'nullstack';
 import { Mococa } from '@types';
-import { SegmentControl } from '@common/components/SegmentControl';
-import { Assets } from '@cms/assets';
 import { MococaForm } from '@common/components/Form';
 
 interface Props extends Mococa.FormProps {
@@ -10,7 +8,10 @@ interface Props extends Mococa.FormProps {
 
 export class Form extends Nullstack<Props> {
   values = {
-    background: '#ffffff',
+    section_title: 'Contact',
+    title: 'Want to reach out?',
+    subtitle:
+      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
   };
 
   update({ onsubmit }: NullstackClientContext<Props>) {
@@ -25,12 +26,21 @@ export class Form extends Nullstack<Props> {
     });
   }
 
-  render() {
+  render({ onsubmit }: NullstackClientContext<Props>) {
     return (
-      <form class="mococa-form">
+      <form
+        class="mococa-form"
+        onsubmit={() => onsubmit({ values: this.values })}
+      >
         <MococaForm.Input
-          label="Background color"
-          bind={this.values.background}
+          label="Section Title"
+          bind={this.values.section_title}
+        />
+        <MococaForm.Input label="Title" bind={this.values.title} />
+        <MococaForm.TextArea
+          label="Subtitle"
+          bind={this.values.subtitle}
+          rows={8}
         />
       </form>
     );
