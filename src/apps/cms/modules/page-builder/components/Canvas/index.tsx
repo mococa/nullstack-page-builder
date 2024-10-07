@@ -9,7 +9,7 @@ import './styles.scss';
 const wrapper_style = (visible: boolean) =>
   visible
     ? 'left: 0;z-index: 2;position: absolute;top: 0;width: 100%;height: calc(100% - 48px);margin-top: 48px;background: white;overflow: auto;'
-    : 'position:absolute; z-index:-1; aspect-ratio: 16/9; width: 1920px; left: -2690px;display:flex;';
+    : 'position:absolute; z-index:-1; height: auto; min-height: 1080px; width: 1920px; left: -2690px;display:flex;';
 
 export class Canvas extends Nullstack {
   _html2canvas;
@@ -25,8 +25,6 @@ export class Canvas extends Nullstack {
 
   hydrate({ instances }: NullstackClientContext) {
     const html2canvas = require('html2canvas');
-
-    const { elements } = instances.pagebuilder;
 
     this.canvas = new fabric.Canvas(this.canvas_ref, {
       width: this.canvas_wrapper.clientWidth,
@@ -96,9 +94,19 @@ export class Canvas extends Nullstack {
 
     const vpt = this.canvas.viewportTransform.slice();
 
+    const pageElement = document.querySelector('.element-page');
+    if (!pageElement) return;
+
     const result = await this._html2canvas(this.svg_wrapper, {
       useCORS: true,
       allowTaint: false,
+      backgroundColor: null,
+      imageTimeout: 15000,
+      logging: true,
+      scale: 1,
+      scrollY: -window.scrollY,
+      height: Math.max(pageElement.clientHeight, 1080),
+      windowHeight: Math.max(pageElement.clientHeight, 1080),
     });
 
     const page = instances.pagebuilder.elements.elements.find(
@@ -106,11 +114,12 @@ export class Canvas extends Nullstack {
     );
 
     const img = this.canvas.getObjects()[0];
+
     const options: fabric.IImageOptions | null = !img
       ? {}
       : {
           aCoords: img.aCoords,
-          height: img.height,
+          height: Math.max(pageElement.clientHeight, 1080),
           angle: img.angle,
           width: img.width,
           left: img.left,
@@ -163,18 +172,27 @@ export class Canvas extends Nullstack {
       this.pressingSpace = true;
       return;
     }
+    const { elements } = instances.pagebuilder;
 
     this.pressingSpace = false;
 
-    if (!this.canvas.getActiveObject()) return;
+    const selectingCanvas = this.canvas.getActiveObject();
 
     if (event.key === 'Delete') {
-      if (!confirm('Are you sure you want to clear everything?')) return;
-      instances.pagebuilder.elements.elements = [];
+      if (selectingCanvas) {
+        const msg = 'Are you sure you want to clear everything?';
+        const confirmation = confirm(msg);
+        if (!confirmation) return;
+
+        elements.elements = [];
+      }
+
       this.canvas.clear();
       this.canvas.renderAll();
       this.draw({});
     }
+
+    if (!selectingCanvas) return;
 
     if (!event.ctrlKey) return;
 

@@ -1,5 +1,9 @@
-import Nullstack from 'nullstack';
-
+import Nullstack, {
+  BaseNullstackClientContext,
+  NullstackClientContext,
+} from 'nullstack';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { Instances } from '@common/instances';
 
 import { PageBuilderTemplate } from '@cms/modules/page-builder/templates';
@@ -21,10 +25,7 @@ export class Application extends Nullstack {
         </head>
 
         <body>
-          {/* <PageBuilderInstance persistent key="pagebuilder" /> */}
-
           <Instances />
-          {/* <PageBuilderInstance persistent key="pagebuilder" /> */}
 
           <PageBuilderTemplate />
         </body>

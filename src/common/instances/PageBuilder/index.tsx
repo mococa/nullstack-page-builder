@@ -11,6 +11,25 @@ export class PageBuilderInstance extends Nullstack {
   elements: ElementsInstances;
   previewing: boolean = false;
 
+  flatten() {
+    const flatten_with_parent_id = (
+      elements: Mococa.BuildComponent[],
+      parentId?: string,
+    ) => {
+      return flatMap(elements, ({ children, component, form, id, ...rest }) => {
+        const elementWithParent = { ...rest, id, parentId };
+
+        if (children && children.length > 0) {
+          return [elementWithParent, ...flatten_with_parent_id(children, id)];
+        }
+
+        return [elementWithParent];
+      });
+    };
+
+    return flatten_with_parent_id(this.elements.elements);
+  }
+
   copy({}) {
     const flatten_with_parent_id = (
       elements: Mococa.BuildComponent[],
